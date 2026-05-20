@@ -500,13 +500,13 @@ class Robot {
         let speedMod = inDepot ? 0.65 : 1.0;
 
         // Blitz maintains 60% speed while active, Dumper 25%, others 50%
-        let passSpeedDampen = this.name === 'Blitz' ? 0.60 : (this.name === 'dumper' ? 0.25 : 0.50);
-        this.vx += moveX * (onBump ? 0.15 : (this.model.accel * speedMod * (isActionActive ? passSpeedDampen : 1.0)));
-        this.vy += moveY * (onBump ? 0.15 : (this.model.accel * speedMod * (isActionActive ? passSpeedDampen : 1.0)));
+        let passSpeedDampen = this.name === 'Blitz' ? 0.60 : (this.name === 'dumper' ? 0.25 : 1.0);
+        this.vx += moveX * (onBump ? 0.15 : (this.model.accel * speedMod * ( ? passSpeedDampen : 1.0)));
+        this.vy += moveY * (onBump ? 0.15 : (this.model.accel * speedMod * ( ? passSpeedDampen : 1.0)));
 
         let isLockedOn = true;
         
-        if (this.name === 'dumper' && isActionActive && !inTower) {
+        if (this.name === 'dumper' &&  && !inTower) {
             let tx = isShootingZone ? zones.find(z => z.type === 'hub' && z.side === alliance).x + HUB_S/2 : (alliance === 'red' ? 40 : FIELD_W - 40);
             let ty = isShootingZone ? zones.find(z => z.type === 'hub' && z.side === alliance).y + HUB_S/2 : (rcy < FIELD_H/2 ? 40 : FIELD_H - 40);
             let diff = Math.atan2(ty - rcy, tx - rcx) + Math.PI - this.angle;
@@ -514,7 +514,7 @@ class Robot {
             let autoSpeedCap = 0.20 * speedMod * (isShootingZone ? 0.45 : 0.6); 
             this.vAngle = Math.max(-autoSpeedCap, Math.min(autoSpeedCap, diff * 0.45)); 
             if (Math.abs(diff) > 0.04) isLockedOn = false; 
-        } else if (this.name === 'Blitz' && isActionActive && !inTower) {
+        } else if (this.name === 'Blitz' &&  && !inTower) {
             let diff = 0;
             if (isShootingZone) {
                 // Shoot straight at the hub
