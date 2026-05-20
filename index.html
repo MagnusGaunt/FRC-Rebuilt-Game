@@ -592,7 +592,7 @@ class Robot {
 
     fireSingleStream(streamIdx, totalStreams, customSpacing, isShooting, alliance, rcx, rcy) {
         let launchAngle = this.angle;
-        let speed = 11.5;
+        let speed = 20;
 
         if (isShooting) {
             let z = zones.find(z => z.type === 'hub' && z.side === alliance);
