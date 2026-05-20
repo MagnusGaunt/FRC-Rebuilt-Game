@@ -269,7 +269,7 @@ function playSound(key) {
 const BOT_MODELS = {
     'turret': { accel: 0.38, rotSpeed: 0.05, capacity: 105, fireRate: 70, w: 35, h: 35 },
     'Miss Daisy': { accel: 0.38, rotSpeed: 0.05, capacity: 8, fireRate: 85, w: 35, h: 35 },
-    'double turret':  { accel: 0.38, rotSpeed: 0.05, capacity: 60, fireRate: 60, w: 35, h: 35 },
+    'double turret':  { accel: 0.38, rotSpeed: 0.05, capacity: 60, fireRate: 200, w: 35, h: 35 },
     'dumper':  { accel: 0.38, rotSpeed: 0.045, capacity: 110, fireRate: 0, w: 35, h: 35 },
     'Blitz':  { accel: 0.38, rotSpeed: 0.05, capacity: 15, fireRate: 0, w: 35, h: 35 } 
 };
@@ -629,7 +629,7 @@ class Robot {
     }
 
     fireStandard(isShooting, alliance, rcx, rcy, now) {
-        let launchAngle = this.angle, speed = 16;
+        let launchAngle = this.angle, speed = 20;
         if (isShooting) {
             let z = zones.find(z => z.type === 'hub' && z.side === alliance);
             launchAngle = Math.atan2((z.y+z.h/2)-rcy, (z.x+z.w/2)-rcx);
